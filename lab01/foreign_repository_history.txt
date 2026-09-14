@@ -1,0 +1,15 @@
+Изучение истории чужого репозитория
+===================================
+
+Репозиторий: https://github.com/octocat/Hello-World.git
+Команда клонирования: git clone https://github.com/octocat/Hello-World.git
+Команда просмотра: git log --date=short --pretty=format:"%h | %ad | %an | %s" -10
+
+Последние коммиты на момент выполнения:
+7fd1a60 | 2012-03-06 | The Octocat | Merge pull request #6 from Spaceghost/patch-1
+7629413 | 2011-09-13 | Johnneylee Jack Rollins | New line at end of file. --Signed off by Spaceghost
+553c207 | 2011-01-26 | cameronmcefee | first commit
+
+Наблюдение: история содержит исходный коммит, последующее исправление и
+merge-коммит Pull Request. В удалённом репозитории также присутствуют ветки
+master, octocat-patch-1 и test.

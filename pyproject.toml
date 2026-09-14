@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mitp-labs-1-8"
+version = "1.0.0"
+description = "Лабораторные работы 1–8 по МИТП, вариант 2"
+requires-python = ">=3.11"
+dependencies = [
+    "Flask>=3.0,<4.0",
+    "fastapi>=0.115,<1.0",
+    "requests>=2.32,<3.0",
+    "uvicorn>=0.30,<1.0",
+]
+
+[project.optional-dependencies]
+dev = ["httpx>=0.27,<1.0", "pytest>=8.0,<9.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"

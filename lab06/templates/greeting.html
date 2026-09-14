@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Форма приветствия{% endblock %}
+{% block content %}
+  <h1>Введите имя</h1>
+  <form method="post">
+    <label for="name">Имя</label>
+    <input id="name" name="name" required autocomplete="name">
+    <button type="submit">Поприветствовать</button>
+  </form>
+  {% if name %}<p class="result">Привет, {{ name }}!</p>{% endif %}
+{% endblock %}
