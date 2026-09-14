@@ -1,8 +1,8 @@
-import logging
-
 import pytest
 
-from lab04.functional import factorial, filter_even, logged
+from lab04.task_02 import filter_even
+from lab04.task_04 import factorial
+from lab04.task_07 import add
 
 
 def test_filter_even() -> None:
@@ -19,12 +19,8 @@ def test_factorial_rejects_negative_number() -> None:
         factorial(-1)
 
 
-def test_logged_decorator(caplog: pytest.LogCaptureFixture) -> None:
-    @logged
-    def square(number: int) -> int:
-        return number**2
-
-    with caplog.at_level(logging.INFO, logger="lab04.functional"):
-        assert square(4) == 16
-    assert "Вызов square" in caplog.text
-    assert "Результат square: 16" in caplog.text
+def test_logging_decorator(capsys: pytest.CaptureFixture[str]) -> None:
+    assert add(2, 3) == 5
+    output = capsys.readouterr().out
+    assert "Вызов функции: add" in output
+    assert "Результат: 5" in output

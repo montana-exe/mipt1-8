@@ -2,11 +2,11 @@
 
 Вариант 2, средний уровень:
 
-- № 2 — зависимость `requests` добавлена в `pyproject.toml` и общий
+- `task_02.py` — зависимость `requests` добавлена в `pyproject.toml` и общий
   `requirements.txt`;
-- № 4 — калькулятор разработан по TDD: сначала создан коммит с тестами
+- `task_04.py` — калькулятор разработан по TDD: сначала создан коммит с тестами
   `test(lab8): define calculator behavior`, затем написана реализация;
-- № 7 — операции калькулятора записываются через стандартный модуль `logging`.
+- `task_07.py` — пример работы со стандартным модулем `logging`.
 
 Установка зависимостей лабораторной с Poetry:
 
@@ -19,5 +19,7 @@ poetry show -C lab08 requests
 
 ```bash
 python -m pytest
-python -m lab08.calculator
+python -m lab08.task_02
+python -m lab08.task_04
+python -m lab08.task_07
 ```

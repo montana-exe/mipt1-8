@@ -2,26 +2,23 @@
 
 Вариант 2, средний уровень:
 
-- № 2 — Flask-страница с формой «имя → приветствие»;
-- № 4 — Flask-страница с таблицей данных;
-- № 7 — FastAPI endpoint, возвращающий JSON.
+- `task_02.py` — Flask-страница с формой «имя → приветствие»;
+- `task_04.py` — Flask-страница с таблицей данных;
+- `task_07.py` — FastAPI endpoint, возвращающий JSON.
 
 Установка выполняется из корня проекта: `pip install -r requirements.txt`.
 
-Flask:
+Каждое Flask-задание запускается отдельно:
 
 ```bash
-flask --app lab06.flask_app run --debug
+python -m lab06.task_02
+python -m lab06.task_04
 ```
-
-Откройте `http://127.0.0.1:5000/` для формы и
-`http://127.0.0.1:5000/students` для таблицы.
 
 FastAPI:
 
 ```bash
-uvicorn lab06.fastapi_app:app --reload
+uvicorn lab06.task_07:app --reload
 ```
 
-JSON доступен по адресу `http://127.0.0.1:8000/api/status`, интерактивная
-документация — по адресу `http://127.0.0.1:8000/docs`.
+JSON доступен по адресу `http://127.0.0.1:8000/api/status`.

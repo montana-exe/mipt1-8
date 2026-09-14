@@ -2,7 +2,8 @@ import logging
 
 import pytest
 
-from lab08.calculator import Calculator
+from lab08.task_04 import Calculator
+from lab08.task_07 import calculate_total
 
 
 def test_calculator_operations() -> None:
@@ -19,7 +20,8 @@ def test_division_by_zero() -> None:
 
 
 def test_calculator_writes_log(caplog: pytest.LogCaptureFixture) -> None:
-    with caplog.at_level(logging.INFO, logger="lab08.calculator"):
-        result = Calculator().add(2, 3)
+    with caplog.at_level(logging.INFO, logger="lab08.task_07"):
+        result = calculate_total([2, 3])
     assert result == 5
-    assert "Сложение: 2 + 3 = 5" in caplog.text
+    assert "Получено цен: 2" in caplog.text
+    assert "Итоговая сумма: 5" in caplog.text

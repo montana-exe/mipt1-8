@@ -2,10 +2,12 @@
 
 Вариант 2, средний уровень:
 
-- № 2 — фильтрация чётных чисел через `filter`;
-- № 4 — факториал через `functools.reduce`;
-- № 7 — декоратор логирования вызова функции.
+- `task_02.py` — фильтрация чётных чисел через `filter`;
+- `task_04.py` — факториал через `functools.reduce`;
+- `task_07.py` — декоратор логирования вызова функции.
 
 ```bash
-python -m lab04.functional
+python -m lab04.task_02
+python -m lab04.task_04
+python -m lab04.task_07
 ```

@@ -1,14 +1,12 @@
-import pytest
-
-from lab05.app import selected_message
+from lab05.task_02 import text_for_output
+from lab05.task_04 import selected_message
 
 
 def test_selected_message() -> None:
-    items = ("Python", "Git")
-    assert selected_message(items, None) == "Элемент не выбран"
-    assert selected_message(items, 1) == "Выбрано: Git"
+    assert selected_message(None) == "Элемент не выбран"
+    assert selected_message("Git") == "Выбрано: Git"
 
 
-def test_selected_message_rejects_invalid_index() -> None:
-    with pytest.raises(IndexError):
-        selected_message(("Python",), 2)
+def test_text_for_output() -> None:
+    assert text_for_output("  Привет  ") == "Привет"
+    assert text_for_output("   ") == "Текст не введён"

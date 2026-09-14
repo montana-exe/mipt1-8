@@ -1,43 +1,35 @@
 import sqlite3
+from pathlib import Path
 
-import pytest
-
-from lab07.database import add_student, connect, initialize_database, list_students, update_student
-
-
-@pytest.fixture
-def database() -> sqlite3.Connection:
-    connection = connect(":memory:")
-    initialize_database(connection)
-    yield connection
-    connection.close()
+from lab07.task_02 import insert_student
+from lab07.task_04 import get_student_name, prepare_database, update_student
+from lab07.task_07 import create_tables, get_table_names
 
 
-def test_multiple_tables_are_created(database: sqlite3.Connection) -> None:
-    names = {
-        row["name"]
-        for row in database.execute("SELECT name FROM sqlite_master WHERE type = 'table'")
-    }
-    assert {"groups", "students"} <= names
+def test_insert_student(tmp_path: Path) -> None:
+    database = tmp_path / "insert.db"
+    student_id = insert_student(database, "Анна", "ПИ-21")
+
+    with sqlite3.connect(database) as connection:
+        row = connection.execute(
+            "SELECT name, group_name FROM students WHERE id = ?",
+            (student_id,),
+        ).fetchone()
+
+    assert row == ("Анна", "ПИ-21")
 
 
-def test_insert_and_update(database: sqlite3.Connection) -> None:
-    student_id = add_student(database, "Анна", "ПИ-21")
-    assert list_students(database) == [
-        {"id": student_id, "name": "Анна", "group_name": "ПИ-21"}
-    ]
+def test_update_student(tmp_path: Path) -> None:
+    database = tmp_path / "update.db"
+    prepare_database(database)
 
-    assert update_student(
-        database,
-        student_id,
-        name="Анна Соколова",
-        group_name="ПИ-22",
-    )
-    assert list_students(database) == [
-        {"id": student_id, "name": "Анна Соколова", "group_name": "ПИ-22"}
-    ]
+    assert update_student(database, 1, "Анна Соколова")
+    assert get_student_name(database, 1) == "Анна Соколова"
+    assert not update_student(database, 999, "Неизвестный студент")
 
 
-def test_unknown_group_is_rejected(database: sqlite3.Connection) -> None:
-    with pytest.raises(ValueError, match="не найдена"):
-        add_student(database, "Анна", "НЕИЗВЕСТНАЯ")
+def test_multiple_tables_are_created(tmp_path: Path) -> None:
+    database = tmp_path / "tables.db"
+    create_tables(database)
+
+    assert set(get_table_names(database)) == {"groups", "students"}

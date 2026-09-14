@@ -1,6 +1,8 @@
 import pytest
 
-from lab02.tasks import count_vowels, gcd, sum_odd_numbers
+from lab02.task_02 import sum_odd_numbers
+from lab02.task_04 import gcd
+from lab02.task_07 import count_vowels
 
 
 @pytest.mark.parametrize(("n", "expected"), [(10, 25), (1, 1), (0, 0), (-5, 0)])
