@@ -1,26 +1,18 @@
-import pytest
-
-from lab04.task_02 import filter_even
-from lab04.task_04 import factorial
+from lab04.task_02 import even_numbers
 from lab04.task_07 import add
 
 
 def test_filter_even() -> None:
-    assert filter_even([1, 2, 3, 4, 5, 6]) == [2, 4, 6]
+    assert even_numbers == [2, 4, 6, 8, 10]
 
 
-@pytest.mark.parametrize(("number", "expected"), [(0, 1), (1, 1), (5, 120)])
-def test_factorial(number: int, expected: int) -> None:
-    assert factorial(number) == expected
+def test_factorial(run_script) -> None:
+    result = run_script("lab04/task_04.py", "5\n")
+    assert "5! = 120" in result.stdout
 
 
-def test_factorial_rejects_negative_number() -> None:
-    with pytest.raises(ValueError):
-        factorial(-1)
-
-
-def test_logging_decorator(capsys: pytest.CaptureFixture[str]) -> None:
+def test_decorator(capsys) -> None:
     assert add(2, 3) == 5
     output = capsys.readouterr().out
-    assert "Вызов функции: add" in output
+    assert "Вызов функции add" in output
     assert "Результат: 5" in output

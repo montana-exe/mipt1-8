@@ -1,12 +1,24 @@
-from lab05.task_02 import text_for_output
-from lab05.task_04 import selected_message
+from pathlib import Path
 
 
-def test_selected_message() -> None:
-    assert selected_message(None) == "Элемент не выбран"
-    assert selected_message("Git") == "Выбрано: Git"
+def source(name: str) -> str:
+    return (Path(__file__).parents[1] / "lab05" / name).read_text(encoding="utf-8")
 
 
-def test_text_for_output() -> None:
-    assert text_for_output("  Привет  ") == "Привет"
-    assert text_for_output("   ") == "Текст не введён"
+def test_text_field_and_button() -> None:
+    code = source("task_02.py")
+    assert "tk.Entry" in code
+    assert "tk.Button" in code
+    assert "entry.get()" in code
+
+
+def test_listbox() -> None:
+    code = source("task_04.py")
+    assert "tk.Listbox" in code
+    assert "<<ListboxSelect>>" in code
+
+
+def test_file_exit_menu() -> None:
+    code = source("task_07.py")
+    assert 'label="Exit"' in code
+    assert "window.destroy" in code

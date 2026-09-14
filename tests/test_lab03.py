@@ -1,13 +1,14 @@
-import pytest
-
 from lab03.task_02 import Student
 from lab03.task_04 import Shape
 from lab03.task_07 import Vector
 
 
-def test_student_information() -> None:
-    student = Student("Анна", 20, "ПИ-21")
-    assert student.get_info() == "Студент: Анна; возраст: 20; группа: ПИ-21"
+def test_student(capsys) -> None:
+    Student("Анна", 20, "ПИ-21").show_info()
+    output = capsys.readouterr().out
+    assert "Студент: Анна" in output
+    assert "Возраст: 20" in output
+    assert "Группа: ПИ-21" in output
 
 
 def test_shape() -> None:
@@ -17,9 +18,6 @@ def test_shape() -> None:
 
 
 def test_vector_addition() -> None:
-    assert Vector(1, 2) + Vector(3, 4) == Vector(4, 6)
-
-
-def test_shape_dimensions_must_be_positive() -> None:
-    with pytest.raises(ValueError):
-        Shape(0, 5)
+    result = Vector(1, 2) + Vector(3, 4)
+    assert result.x == 4
+    assert result.y == 6

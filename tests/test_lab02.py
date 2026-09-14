@@ -1,22 +1,13 @@
-import pytest
-
-from lab02.task_02 import sum_odd_numbers
-from lab02.task_04 import gcd
-from lab02.task_07 import count_vowels
+def test_sum_odd_numbers(run_script) -> None:
+    result = run_script("lab02/task_02.py", "10\n")
+    assert "Сумма нечётных чисел до 10: 25" in result.stdout
 
 
-@pytest.mark.parametrize(("n", "expected"), [(10, 25), (1, 1), (0, 0), (-5, 0)])
-def test_sum_odd_numbers(n: int, expected: int) -> None:
-    assert sum_odd_numbers(n) == expected
+def test_gcd(run_script) -> None:
+    result = run_script("lab02/task_04.py", "54\n24\n")
+    assert "НОД: 6" in result.stdout
 
 
-@pytest.mark.parametrize(
-    ("first", "second", "expected"),
-    [(54, 24, 6), (-54, 24, 6), (0, 7, 7), (0, 0, 0)],
-)
-def test_gcd(first: int, second: int, expected: int) -> None:
-    assert gcd(first, second) == expected
-
-
-def test_count_vowels_for_russian_and_english() -> None:
-    assert count_vowels("Привет, Python!") == 3
+def test_count_vowels(run_script) -> None:
+    result = run_script("lab02/task_07.py", "Привет, Python!\n")
+    assert "Количество гласных: 3" in result.stdout

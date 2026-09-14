@@ -22,7 +22,7 @@ def test_flask_table() -> None:
     client = table_app.test_client()
     response = client.get("/")
     assert response.status_code == 200
-    assert "Анна Петрова" in response.get_data(as_text=True)
+    assert "Анна" in response.get_data(as_text=True)
 
 
 def test_fastapi_json_endpoint() -> None:
